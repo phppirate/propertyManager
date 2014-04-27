@@ -42,7 +42,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
             <ul class="nav">
                 <li><?php echo $this->Html->link('Home', '/'); ?></li>
                 <li><?php echo $this->Html->link('Properties', array('controller' => 'properties', 'action' => 'index')); ?></li>
-                <li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index')); ?></li>
+                <?php if ($this->App->admin()){ ?>
+                    <li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index')); ?></li>
+                <?php } ?>
                 <?php if (AuthComponent::user() != null){ ?>
                     <li><?php echo $this->Html->link(AuthComponent::user('username'), array('controller' => 'users', 'action' => 'view', AuthComponent::user('id'))); ?></li>
                     <li><?php echo $this->Html->link('Log Out', array('controller' => 'users', 'action' => 'logout')); ?></li>

@@ -49,6 +49,28 @@ class Property extends AppModel {
                 'message' => 'The Zip-code can not be empty.',
             ),
 		),
+        'image_path' => array(
+            'uploadError' => array(
+                'rule' => 'uploadError',
+                'message' => 'The property image was not uploaded successfully.',
+                'allowEmpty' => true,
+            ),
+            'mimeType' => array(
+                'rule' => array('mimeType', array('image/gif', 'image/png', 'image/jpg', 'image/jpeg')),
+                'message' => 'Please only upload images (gif, png, jpg).',
+                'allowEmpty' => true,
+            ),
+            'fileSize' => array(
+                'rule' => array('fileSize', '<=', '1MB'),
+                'message' => 'Property image must not be bigger the 1MB.',
+                'allowEmpty' => true,
+            ),
+            'processPropertyImageUpload' => array(
+                'rule' => 'processPropertyImageUpload',
+                'message' => 'Unable to process property image.',
+                'allowEmpty' => true,
+            ),
+        )
 	);
 
     /**
@@ -72,4 +94,16 @@ class Property extends AppModel {
             'unique' => 'true',
         ),
     );
+
+
+    public function processPropertyImageUpload($check = array()){
+        if (!is_uploaded_file($check['image_path']['tmp_name'])){
+            return false;
+        }
+        if (!move_uploaded_file($check['image_path']['tmp_name'], WWW_ROOT . 'img' . DS . 'uploads' . DS . $check['image_path']['name'])){
+            return false;
+        }
+        $this->data[$this->alias]['image_path'] = 'uploads' . DS . $check['image_path']['name'];
+        return true;
+    }
 }
