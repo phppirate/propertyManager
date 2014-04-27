@@ -1,12 +1,13 @@
 <div class="properties form">
-<?php echo $this->Form->create('Property'); ?>
+<?php echo $this->Form->create('Property', array('enctype' => 'multipart/form-data' ); ?>
 	<fieldset>
 		<legend><?php echo __('Add Property'); ?></legend>
 	<?php
 		echo $this->Form->input('address');
 		echo $this->Form->input('city');
 		echo $this->Form->input('state');
-		echo $this->Form->input('zip');
+        echo $this->Form->input('zip');
+        echo $this->Form->input('image_path', array('type', 'file'));
 		echo $this->Form->input('User');
 	?>
 	</fieldset>

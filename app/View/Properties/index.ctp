@@ -6,7 +6,8 @@
 			<th><?php echo $this->Paginator->sort('address'); ?></th>
 			<th><?php echo $this->Paginator->sort('city'); ?></th>
 			<th><?php echo $this->Paginator->sort('state'); ?></th>
-			<th><?php echo $this->Paginator->sort('zip'); ?></th>
+            <th><?php echo $this->Paginator->sort('zip'); ?></th>
+            <th><?php echo $this->Paginator->sort('Image'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($properties as $property): ?>
@@ -15,7 +16,8 @@
 		<td><?php echo h($property['Property']['address']); ?>&nbsp;</td>
 		<td><?php echo h($property['Property']['city']); ?>&nbsp;</td>
 		<td><?php echo h($property['Property']['state']); ?>&nbsp;</td>
-		<td><?php echo h($property['Property']['zip']); ?>&nbsp;</td>
+        <td><?php echo h($property['Property']['zip']); ?>&nbsp;</td>
+        <td><?php echo !empty($property['Property']['image_path']) ? 'Yes' : 'No'; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $property['Property']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $property['Property']['id'])); ?>

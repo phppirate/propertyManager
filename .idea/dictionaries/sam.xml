@@ -3,10 +3,12 @@
     <words>
       <w>cellpadding</w>
       <w>cellspacing</w>
+      <w>enctype</w>
       <w>endforeach</w>
       <w>fieldset</w>
       <w>flyer</w>
       <w>isset</w>
+      <w>multipart</w>
     </words>
   </dictionary>
 </component>

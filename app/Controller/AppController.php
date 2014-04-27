@@ -54,6 +54,6 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(){
-        $this->Auth->allow('add', 'edit');
+        $this->Auth->allow('');
     }
 }

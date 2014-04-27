@@ -21,11 +21,16 @@
 			<?php echo h($property['Property']['state']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Zip'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['zip']); ?>
-			&nbsp;
-		</dd>
+        <dt><?php echo __('Zip'); ?></dt>
+        <dd>
+            <?php echo h($property['Property']['zip']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Image'); ?></dt>
+        <dd>
+            <?php if ($property['Property']['image_path']){ echo $this->Html->image($property['Property']['image_path']); } ?>
+            &nbsp;
+        </dd>
 	</dl>
 </div>
 <div class="actions">

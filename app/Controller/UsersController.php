@@ -10,6 +10,16 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
  */
 class UsersController extends AppController {
 
+    public function beforeFilter() {
+        //parent::beforeFilter();
+
+        if ($this->Auth->user('role') != 'admin') {
+            $this->Auth->deny(array('controller' => 'Users', 'action' => 'index'));
+        }
+    }
+
+
+
 /**
  * Components
  *
@@ -69,7 +79,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		if (!$this->User->exists($id)) {
+        if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
