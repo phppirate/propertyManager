@@ -1,22 +1,30 @@
-<div class="notes form">
+<div class="notes form col-lg-4 col-md-6 col-sm-12">
+<h2><?php echo __('Edit Note'); ?> <span class="hth pull-right">
+        <?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $this->Form->value('Note.id')), array('escape' => false), __('Are you sure you want to delete # %s?', $this->Form->value('Note.id'))); ?>
+        <?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>',
+        array('controller' => 'users', 'action' => 'notes'), array('escape' => false)); ?>
+</span></h2>
 <?php echo $this->Form->create('Note'); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Note'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('title');
-		echo $this->Form->input('content');
-		echo $this->Form->input('date_modified');
-	?>
+        <div class="form-group">
+        <?php echo $this->Form->input('id', array('class' => 'form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'label' => 'none', 'class' => 'form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('property_id', array('class' => 'form-control')); ?>
+        </div>
+        <div class="form-group">
+        <?php echo $this->Form->input('title', array('class' => 'form-control')); ?>
+        </div>
+        <div class="form-group">
+        <?php echo $this->Form->input('content', array('class' => 'form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo $this->Form->input('date_modified', array('type' => 'date', 'class' => 'form-control')); ?>
+        </div>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-success')); ?>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Note.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Note.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Notes'), array('action' => 'index')); ?></li>
-	</ul>
 </div>

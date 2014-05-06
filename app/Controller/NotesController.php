@@ -22,9 +22,8 @@ class NotesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Note->recursive = 0;
-		$this->set('notes', $this->Paginator->paginate());
-	}
+        $this->redirect(array('controller' => 'users', 'action' => 'notes'));
+    }
 
 /**
  * view method
@@ -34,12 +33,8 @@ class NotesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Note->exists($id)) {
-			throw new NotFoundException(__('Invalid note'));
-		}
-		$options = array('conditions' => array('Note.' . $this->Note->primaryKey => $id));
-		$this->set('note', $this->Note->find('first', $options));
-	}
+        $this->redirect(array('controller' => 'users', 'action' => 'notes'));
+    }
 
 /**
  * add method
@@ -56,6 +51,8 @@ class NotesController extends AppController {
 				$this->Session->setFlash(__('The note could not be saved. Please, try again.'));
 			}
 		}
+        $properties = $this->Note->Property->find('list');
+        $this->set(compact('properties'));
 		$users = $this->Note->User->find('list');
 		$this->set(compact('users'));
 	}
@@ -82,8 +79,10 @@ class NotesController extends AppController {
 			$options = array('conditions' => array('Note.' . $this->Note->primaryKey => $id));
 			$this->request->data = $this->Note->find('first', $options);
 		}
-		$users = $this->Note->User->find('list');
-		$this->set(compact('users'));
+        $properties = $this->Note->Property->find('list');
+        $this->set(compact('properties'));
+        $users = $this->Note->User->find('list');
+        $this->set(compact('users'));
 	}
 
 /**

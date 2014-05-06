@@ -9,6 +9,20 @@ App::uses('AppController', 'Controller');
  */
 class PropertiesController extends AppController {
 
+
+    protected function checkAdmin(){
+        if ($this->Auth->user('role') != 'admin'){
+            $this->Session->setFlash('You are not authorized to access this page.');
+            $this->redirect(array('controller' => 'welcome', 'action' => 'index'));
+        }
+    }
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->checkAdmin();
+    }
+
+    var $uses = array('Property', 'User');
 /**
  * Components
  *
@@ -114,94 +128,4 @@ class PropertiesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
-
-/**
- * admin_index method
- *
- * @return void
- */
-	public function admin_index() {
-		$this->Property->recursive = 0;
-		$this->set('properties', $this->Paginator->paginate());
-	}
-
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		if (!$this->Property->exists($id)) {
-			throw new NotFoundException(__('Invalid property'));
-		}
-		$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
-		$this->set('property', $this->Property->find('first', $options));
-	}
-
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Property->create();
-			if ($this->Property->save($this->request->data)) {
-				$this->Session->setFlash(__('The property has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Property->User->find('list');
-		$this->set(compact('users'));
-	}
-
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_edit($id = null) {
-		if (!$this->Property->exists($id)) {
-			throw new NotFoundException(__('Invalid property'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Property->save($this->request->data)) {
-				$this->Session->setFlash(__('The property has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
-			$this->request->data = $this->Property->find('first', $options);
-		}
-		$users = $this->Property->User->find('list');
-		$this->set(compact('users'));
-	}
-
-/**
- * admin_delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_delete($id = null) {
-		$this->Property->id = $id;
-		if (!$this->Property->exists()) {
-			throw new NotFoundException(__('Invalid property'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Property->delete()) {
-			$this->Session->setFlash(__('The property has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The property could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+}

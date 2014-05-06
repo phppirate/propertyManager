@@ -17,12 +17,12 @@
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('PropertyDetail.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('PropertyDetail.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Property Details'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Properties'), array('controller' => 'properties', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Property'), array('controller' => 'properties', 'action' => 'add')); ?> </li>
-	</ul>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('PropertyDetail.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('PropertyDetail.id'))); ?></li>
+        <li><?php echo $this->Html->link(__('List Property Details'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('List Properties'), array('controller' => 'properties', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('New Property'), array('controller' => 'properties', 'action' => 'add')); ?> </li>
+    </ul>
 </div>

@@ -43,17 +43,11 @@ class AppController extends Controller {
                 'controller' => 'welcome',
                 'action' => 'index',
             ),
+            'adminRedirect' => array(
+                'controller' => 'welcome',
+                'action' => 'index',
+            ),
         ),
     );
 
-    public function admin($user){
-        if ($user['role'] == 'admin'){
-            return true;
-        }
-        return false;
-    }
-
-    public function beforeFilter(){
-        $this->Auth->allow('');
-    }
 }

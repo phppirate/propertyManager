@@ -32,6 +32,13 @@ class Note extends AppModel {
                 'on' => 'create',
             ),
         ),
+        'property_id' => array(
+            'notEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'You need to supply a property.',
+                //'on' => 'create',
+            ),
+        ),
 		'title' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
@@ -62,6 +69,10 @@ class Note extends AppModel {
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id',
+        ),
+        'Property' => array(
+            'className' => 'Property',
+            'foreignKey' => 'property_id',
         )
     );
 }

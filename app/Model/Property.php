@@ -82,7 +82,11 @@ class Property extends AppModel {
         'PropertyDetail' => array(
             'className' => 'PropertyDetail',
             'foreignKey' => 'property_id',
-        )
+        ),
+        'Note' => array(
+            'className' => 'Note',
+            'foreignKey' => 'property_id',
+        ),
     );
 
     public $hasAndBelongsToMany = array(

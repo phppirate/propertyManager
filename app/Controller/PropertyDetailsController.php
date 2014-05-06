@@ -9,6 +9,18 @@ App::uses('AppController', 'Controller');
  */
 class PropertyDetailsController extends AppController {
 
+    protected function checkAdmin(){
+        if ($this->Auth->user('role') != 'admin'){
+            $this->Session->setFlash('You are not authorized to access this page.');
+            $this->redirect(array('controller' => 'welcome', 'action' => 'index'));
+        }
+    }
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->checkAdmin();
+    }
+
 /**
  * Components
  *
