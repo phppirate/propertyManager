@@ -152,6 +152,7 @@ class UsersController extends AppController {
 			if ($hashed_password == $user['User']['password'] || $password == $conpass) {
                 unset($this->request->data['User']['confirmationPassword']);
                 $user = $this->request->data;
+                $this->User->id = $id;
                 if ($this->User->save($user)) {
                     $this->Session->setFlash(__('The user has been saved.'));
                     return $this->redirect(array('action' => 'index'));
